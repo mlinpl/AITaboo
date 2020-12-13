@@ -1,0 +1,78 @@
+.container{
+    color: #252525;
+    font-family: Play, 'Helvetica', 'Arial', sans-serif;
+}
+
+#header {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #E52C2C;
+}
+
+#header img{
+    height: 2rem;
+}
+
+#stats{
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#rules{
+    margin-right: 0;
+    text-align: justify;
+}
+
+#rules p{
+    margin: 0;
+}
+
+.accordion label{
+    font-size: 1.2rem;
+}
+
+#game {
+    height: 80vh;
+}
+
+#deck {
+    position: relative;
+    height: 80%;
+}
+
+.card {
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    background: white;
+    border: solid 0.2rem black;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 90%;
+    text-align: center;
+    font-size: 1.2rem;
+    box-shadow: 0.4rem 0.4rem #303742;
+}
+
+.card-word {
+    color: #E52C2C;
+    font-weight: bold;
+}
+
+.card-taboo {
+
+}
+
+@keyframes swap-cards {
+    0%   {left: 5%; z-index: 0}
+    40%  {left: 100%; z-index: 0}
+    60%  {left: 100%; z-index: -100;}
+    100% {left: 5%; z-index: -100;}
+}
+
+.animated-card {
+    animation-name: swap-cards;
+    animation-duration: 1s;
+    z-index: -100;
+}

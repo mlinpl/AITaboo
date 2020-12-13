@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <title>AITaboo!</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<!-- Page Layout -->
+<div id="container" class="container">
+    <div class="columns">
+
+        <div class="column col-6 col-xl-8 col-lg-10 col-md-12 col-mx-auto">
+
+            <!-- Header -->
+            <div id="header">
+                <a href="https://mlinpl.org"><img src="mlinpl-association.svg" alt="ML in PL Association"></a> AITaboo
+            </div>
+
+            <!-- Stats -->
+            <div id="stats" class="columns bg-warning">
+                <div id="timer" class="column col-6">
+                    <i class="icon icon-time"></i>
+                    <span id="timer-value">0:00</span>
+                </div>
+                <div id="score" class="column col-6 bg-success">
+                    <i class="icon icon-emoji"></i>
+                    <span id="score-value">0</span>
+                </div>
+            </div>
+
+            <!-- Rules & Settings -->
+            <div id="settings" class="columns bg-gray">
+                <div class="column col-12">
+                    <div class="accordion">
+                        <input id="rules-accordion" type="checkbox" name="accordion-checkbox" hidden>
+                        <label class="accordion-header c-hand" for="rules-accordion"><i class="icon icon-arrow-right mr-1"></i>Rules</label>
+                        <div class="accordion-body">
+                            <blockquote id="rules">
+                                <p>
+                                    Two teams play against each other. Players take turns as the "giver," who attempts to prompt
+                                    his/her teammates to guess as many keywords (top, red words on cards) as possible in the allotted time.
+                                    However, each card also has "taboo" (forbidden) words (black words on cards) listed
+                                    which may not be spoken. Should the giver say one must move on to the next word.
+                                    The giver may not say a part of a "taboo" word, nor may they use a form of a word, gestures, sounds, or drawings are not allowed.
+                                    (...)
+                                    While the giver is prompting the teammates they may make as many guesses as they want with no penalties for wrong guesses.
+                                    Once the team correctly guesses the word exactly as written on the card, the giver moves on to the next word.
+                                    (...)
+                                    The playing team receives one point for correct guesses and one penalty point if "taboo" words are spoken.
+                                </p>
+                                <cite>- <a href="https://en.wikipedia.org/wiki/Taboo_(game)">Wikipedia</a></cite>
+                            </blockquote>
+
+                        </div>
+                    </div>
+
+                    <div class="accordion">
+                        <input id="settings-accordion" type="checkbox" name="accordion-checkbox" checked hidden>
+                        <label class="accordion-header c-hand" for="settings-accordion"><i class="icon icon-arrow-right mr-1"></i>Settings</label>
+                        <div class="accordion-body">
+                            <div class="form-horizontal">
+                                <!-- language -->
+                                <!--<div class="form-group">
+                                    <div class="col-3">
+                                        <label class="form-label">Language</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <label class="form-radio">
+                                            <input type="radio" name="language" checked=""><i class="form-icon"></i> English
+                                        </label>
+                                    </div>
+                                    <div class="col-9">
+                                        <label class="form-radio">
+                                            <input type="radio" name="language"><i class="form-icon"></i> Polish
+                                        </label>
+                                    </div>
+                                </div>-->
+
+                                <!-- timer -->
+                                <div class="form-group">
+                                    <div class="col-3">
+                                        <label class="form-label label-lg" for="timelimit">Timelimit (sec):</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="input-group">
+                                            <label class="form-switch input-lg">
+                                                <input id="has-timelimit" type="checkbox" checked><i class="form-icon"></i>
+                                            </label>
+                                            <input id="timelimit" class="form-input input-lg" type="number" placeholder="60" value="60">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- seed -->
+                                <div class="form-group">
+                                    <div class="col-3">
+                                        <label class="form-label label-lg" for="seed">Seed:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input id="seed" class="form-input input-lg" type="text" placeholder="Seed" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-lg" style="width: 100%;" onclick="startGame()"><i class="icon icon-arrow-right"></i> START <i class="icon icon-arrow-left"></i></button>
+                </div>
+            </div>
+
+            <div id="game" style="display: none;">
+                <div id="deck">
+
+                </div>
+
+                <div class="btn-group btn-group-block">
+                    <button class="btn btn-error btn-lg" onclick="failedCard()"><i class="icon icon-cross"></i> Failed</button>
+                    <button class="btn bg-warning btn-lg" style="border-color: #FFB700;" onclick="skipCard()"><i class="icon icon-arrow-right"></i> Skip</button>
+                    <button class="btn btn-success btn-lg" onclick="guessedCard()"><i class="icon icon-check"></i> Guessed</button>
+                </div>
+            </div>
+
+            <div id="footer" >
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="cards.js"></script>
+<script src="game.js"></script>
+
+</body>
+</html>
