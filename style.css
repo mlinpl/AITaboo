@@ -1,6 +1,6 @@
 .container{
     color: #252525;
-    font-family: Play, 'Helvetica', 'Arial', sans-serif;
+    font-family: 'Play', 'Helvetica', 'Arial', sans-serif;
 }
 
 #header {
@@ -19,12 +19,12 @@
     font-size: 1.5rem;
 }
 
-#rules{
+.accordion-body {
     margin-right: 0;
     text-align: justify;
 }
 
-#rules p{
+.accordion-body p, blockquote{
     margin: 0;
 }
 
@@ -39,6 +39,12 @@
 #deck {
     position: relative;
     height: 80%;
+}
+
+.btn-main {
+    width: 100%;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .card {

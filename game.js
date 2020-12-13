@@ -2,6 +2,7 @@
 var currentCardId = 0;
 var cardCount = 0;
 var score = 0;
+var timer;
 
 function LCG(s) {
     return function() {
@@ -28,7 +29,7 @@ function shuffle(array, seed) {
 }
 
 function buildDeck(seed){
-    let shuffled = shuffle([... cards]);
+    let shuffled = shuffle([... cards], seed);
 
     let deckHTML = "";
     for(let i = 0; i < shuffled.length; ++i){
@@ -39,7 +40,6 @@ function buildDeck(seed){
         }
         deckHTML += '</div>';
     }
-    console.log(deckHTML);
     document.getElementById("deck").innerHTML = deckHTML;
 
     currentCardId = 0;
@@ -55,21 +55,23 @@ function updateTimer(timeleft){
 function setTimer(timelimit){
     let timeleft = timelimit;
 
-    updateTimer(timeleft % 60);
-    let x = setInterval(function () {
+    updateTimer(timeleft);
+    timer = setInterval(function () {
         --timeleft;
-        updateTimer(timeleft % 60);
+        updateTimer(timeleft);
         if (timeleft <= 0) {
-            clearInterval(x);
             endGame();
         }
     }, 1000);
 }
 
 function endGame(){
+    clearInterval(timer);
     document.getElementById("settings").style.display = "block";
     document.getElementById("game").style.display = "none";
-    document.getElementById("seed").value = String(Math.floor(Math.random() * 10000));
+    let seedElement = document.getElementById("seed");
+    seedElement.value = String(Math.floor(Math.random() * 10000));
+    setSearchParams(seedElement.value);
 }
 
 function startGame() {
@@ -79,12 +81,12 @@ function startGame() {
     document.getElementById("score-value").innerHTML = String(score);
 
     let seed = document.getElementById("seed").value;
-    buildDeck(1);
+    buildDeck(seed);
 
     if(document.getElementById("has-timelimit").checked) {
         let timelimit = document.getElementById("timelimit").value;
         setTimer(timelimit);
-    }
+    } else updateTimer(0);
 
     document.getElementById("game").style.display = "block";
 }
@@ -121,17 +123,22 @@ function guessedCard(){
     nextCard();
 }
 
+function setSearchParams(seed){
+    url = new URL(window.location.href);
+    url.searchParams.set("seed", seed);
+    //window.location.href = currentUrl;
+    window.history.replaceState({}, document.title, url);
+}
+
 function init(){
     let seedElement = document.getElementById("seed");
     let params = new URLSearchParams(window.location.search);
     if(params.get('seed')) seedElement.value = params.get('seed');
     else seedElement.value = String(Math.floor(Math.random() * 10000));
 
+    setSearchParams(seedElement.value);
     seedElement.addEventListener('change', (event) => {
-        url = new URL(window.location.href);
-        url.searchParams.set("seed", seedElement.value);
-        //window.location.href = currentUrl;
-        window.history.replaceState({}, document.title, url);
+        setSearchParams(seedElement.value);
     });
 }
 
