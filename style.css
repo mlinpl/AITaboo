@@ -59,6 +59,7 @@
     text-align: center;
     font-size: 1.2rem;
     box-shadow: 0.4rem 0.4rem #303742;
+    text-transform: uppercase;
 }
 
 .card-word {
