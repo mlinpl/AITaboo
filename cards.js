@@ -62,7 +62,7 @@ var cards = [
     {"word": "WALL-E", "taboo": ["ROBOT","DISNEY PIXAR","CLEANING","MOVIE","COSMOS"], "source": "handcrafted"},
     {"word": "TESLA", "taboo": ["NICOLA","ELON MASK","CARS","AI","STOCKS"], "source": "handcrafted"},
     {"word": "ARXIV", "taboo": ["RESEARCH","PRE-PRINTS","WEBSITE","CORNELL UNIVERSITY","ARTICLES"], "source": "handcrafted"},
-    
+
     // ai generated
     {"word": "SUPERVISED LEARNING", "taboo": ["TRAINING","FUNCTION","ALGORITHM","BIAS VARIANCE","RISK MINIMIZATION"], "source": "AI generated"},
     {"word": "SPEECH RECOGNITION", "taboo": ["VOICE","SPEAKER","SYSTEM","WORD","SOUND"], "source": "AI generated"},
