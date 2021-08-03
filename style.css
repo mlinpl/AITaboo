@@ -5,7 +5,7 @@
 
 #header {
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     color: #E52C2C;
 }
@@ -33,12 +33,12 @@
 }
 
 #game {
-    height: 80vh;
+    height: 75vh;
 }
 
 #deck {
     position: relative;
-    height: 80%;
+    height: 90%;
 }
 
 .btn-main {
@@ -60,15 +60,31 @@
     font-size: 1.2rem;
     box-shadow: 0.4rem 0.4rem #303742;
     text-transform: uppercase;
+    height: 17rem;
+    overflow: hidden;
+}
+
+.card-content{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .card-word {
     color: #E52C2C;
     font-weight: bold;
+    border-bottom: solid 0.15rem #E52C2C;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .card-taboo {
+    padding: 0.1rem;
+    border-bottom: solid 0.075rem darkgray;
+}
 
+.card-taboo:last-of-type {
+    border-bottom: none;
 }
 
 @keyframes swap-cards {

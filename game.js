@@ -34,11 +34,11 @@ function buildDeck(seed){
     let deckHTML = "";
     for(let i = 0; i < shuffled.length; ++i){
         let card = shuffled[i];
-        deckHTML += `<div id="card${i}" class="card" style="z-index: ${-i}"><div class="card-word">${card['word']}</div>`;
+        deckHTML += `<div id="card${i}" class="card" style="z-index: ${-i}"><div class="card-content"><div class="card-word">${card['word']}</div>`;
         for(let j = 0; j < card['taboo'].length; ++j){
             deckHTML += `<div class="card-taboo">${card['taboo'][j]}</div>`;
         }
-        deckHTML += '</div>';
+        deckHTML += '</div></div>';
     }
     document.getElementById("deck").innerHTML = deckHTML;
 
