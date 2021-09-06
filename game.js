@@ -12,7 +12,16 @@ function LCG(s) {
 }
 
 function shuffle(array, seed) {
-    let rand = LCG(seed);
+    let nSeed = 0;
+    if(isNaN(seed)){
+        for(let i = 0; i < seed.length; ++i) {
+            nSeed += seed.charCodeAt(i);
+        }
+    } else {
+        nSeed = parseInt(seed);
+    }
+
+    let rand = LCG(nSeed);
 
     let i = array.length;
 
@@ -34,7 +43,7 @@ function buildDeck(seed){
     let deckHTML = "";
     for(let i = 0; i < shuffled.length; ++i){
         let card = shuffled[i];
-        deckHTML += `<div id="card${i}" class="card" style="z-index: ${-i}"><div class="card-content"><div class="card-word">${card['word']}</div>`;
+        deckHTML += `<div id="card${i}" class="card back-card"><div class="card-content"><div class="card-word">${card['word']}</div>`;
         for(let j = 0; j < card['taboo'].length; ++j){
             deckHTML += `<div class="card-taboo">${card['taboo'][j]}</div>`;
         }
@@ -43,6 +52,10 @@ function buildDeck(seed){
     document.getElementById("deck").innerHTML = deckHTML;
 
     currentCardId = 0;
+    let currentCard = document.getElementById(`card${currentCardId}`);
+    currentCard.classList.add('front-card');
+    currentCard.classList.remove('back-card');
+
     cardCount = shuffled.length;
 }
 
@@ -93,16 +106,21 @@ function startGame() {
 
 function nextCard() {
     let currentCard = document.getElementById(`card${currentCardId}`);
+
+    let prevCardId = (cardCount + currentCardId - 1) % cardCount;
+    let prevCard = document.getElementById(`card${prevCardId}`);
+
     let nextCardId = (currentCardId + 1) % cardCount;
     let nextCard = document.getElementById(`card${nextCardId}`);
 
-    currentCard.style.zIndex = "0";
+    prevCard.classList.remove('animated-card');
+    prevCard.classList.add('back-card');
 
-    nextCard.style.zIndex = "-1";
-    nextCard.classList.remove('animated-card');
+    nextCard.classList.add('front-card');
+    nextCard.classList.remove('back-card');
 
+    currentCard.classList.remove('front-card');
     currentCard.classList.add('animated-card');
-    currentCard.style.zIndex = "-100";
 
     currentCardId = nextCardId;
 }
